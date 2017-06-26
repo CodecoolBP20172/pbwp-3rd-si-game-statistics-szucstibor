@@ -1,11 +1,8 @@
 import csv
 # Report functions
-year = 0
-games = []
 
 
 def games_to_lists(file_name):
-    global games
     with open(file_name) as stats:
         for line in csv.reader(stats, dialect="excel-tab"):
             games.append(line)
@@ -33,3 +30,16 @@ def get_latest(file_name):
         if games[iteration][2] == latest:
             result = str(games[iteration][0])
             return result
+
+
+def count_by_genre(file_name, genre):
+    games_to_lists(file_name)
+    result = 0
+    for iteration in range(len(games)):
+        if genre == games[iteration][3]:
+            games[iteration]
+            result += 1
+    print(result)
+    return result
+
+count_by_genre("game_stat.txt", "First-person shooter")
