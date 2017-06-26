@@ -67,8 +67,8 @@ def when_was_top_sold_fps(file_name):
     games = games_to_list(file_name)
     best_seller = 0
     fpses = []
-    for iteration in range(len(games)): 
-        if games[iteration][3] == "First-person shooter": 
+    for iteration in range(len(games)):
+        if games[iteration][3] == "First-person shooter":
             fpses.append(games[iteration])
     for iteration in range(len(fpses)):
         if float(fpses[iteration][1]) > float(best_seller):
@@ -77,3 +77,13 @@ def when_was_top_sold_fps(file_name):
         if best_seller == fpses[iteration][1]:
             result = int(fpses[iteration][2])
             return result
+
+
+def sort_abc(file_name):
+    games = games_to_list(file_name)
+    games = sorted(games)
+    result = []
+    for iteration in range(len(games)): 
+        result.append(games[iteration][0])
+    result = sorted(result)
+    return result
