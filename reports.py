@@ -2,10 +2,12 @@ import csv
 # Report functions
 
 
-def games_to_lists(file_name):
+def games_to_list(file_name):
+    games = []
     with open(file_name) as stats:
-        for line in csv.reader(stats, dialect="excel-tab"):
+        for line in csv.reader(stats, delimiter="\t"):
             games.append(line)
+        return games
 
 
 def count_games(file_name):
@@ -21,7 +23,7 @@ def decide(file_name, year):
 
 
 def get_latest(file_name):
-    games_to_lists(file_name)
+    games = games_to_list(file_name)
     latest = 0
     for iteration in range(len(games)):
         if int(games[iteration][2]) > int(latest):
@@ -33,13 +35,19 @@ def get_latest(file_name):
 
 
 def count_by_genre(file_name, genre):
-    games_to_lists(file_name)
+    games = games_to_list(file_name)
     result = 0
     for iteration in range(len(games)):
         if genre == games[iteration][3]:
-            games[iteration]
             result += 1
-    print(result)
     return result
 
-count_by_genre("game_stat.txt", "First-person shooter")
+
+def get_line_number_by_title(file_name, title):
+    games = games_to_list(file_name)
+    result = 0
+    for iteration in range(len(games)):
+        if title == games[iteration][0]:
+            result = int(iteration + 1)
+            break
+    return result
